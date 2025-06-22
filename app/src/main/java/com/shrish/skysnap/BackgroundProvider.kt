@@ -1,13 +1,14 @@
-import com.shrish.skysnap.R
+package com.shrish.skysnap
 
 object BackgroundProvider {
-    fun getBackground(conditionText: String): Int {
-        val condition = conditionText.lowercase()
+    fun getBackground(condition: String): Int {
+        val lc = condition.lowercase()
+
         return when {
-            "rain" in condition -> R.drawable.bg_rainy
-            "cloud" in condition || "overcast" in condition -> R.drawable.bg_cloudy
-            "snow" in condition -> R.drawable.bg_snowy
-            "sun" in condition || "clear" in condition -> R.drawable.bg_sunny
+            "rain" in lc -> R.drawable.bg_rainy
+            "cloud" in lc || "overcast" in lc || "partly" in lc -> R.drawable.bg_cloudy
+            "snow" in lc -> R.drawable.bg_snowy
+            "sun" in lc || "clear" in lc -> R.drawable.bg_sunny
             else -> R.drawable.bg_cloudy
         }
     }

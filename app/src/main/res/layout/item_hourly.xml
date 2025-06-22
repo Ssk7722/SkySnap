@@ -1,51 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/hourlyCard"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="8dp"
     android:layout_margin="4dp"
-    card_view:cardCornerRadius="16dp"
-    card_view:cardElevation="4dp"
-    android:backgroundTint="@color/card_cloudy">
+    android:layout_width="0dp"
+    android:layout_weight="1">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <!-- Hour -->
+    <TextView
+        android:id="@+id/hourText"
+        android:text="Now"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
         android:gravity="center"
-        android:padding="8dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <!-- Time -->
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/default_time"
-            android:textColor="#FFFFFFFF"
-            android:textSize="12sp"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center" />
+    <!-- Hourly Icon -->
+    <ImageView
+        android:id="@+id/hourIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/sunny"/>
 
-        <!-- Weather Icon -->
-        <ImageView
-            android:id="@+id/ivCondition"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="4dp"
-            android:contentDescription="@string/weather_icon"
-            android:src="@drawable/cloud" />
-
-        <!-- Temperature -->
-        <TextView
-            android:id="@+id/tvTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/default_temp"
-            android:textColor="#FFFFFFFF"
-            android:textSize="12sp"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_marginTop="4dp"
-            android:gravity="center" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    <!-- Hourly Temperature -->
+    <TextView
+        android:id="@+id/hourTemp"
+        android:text="25°C"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

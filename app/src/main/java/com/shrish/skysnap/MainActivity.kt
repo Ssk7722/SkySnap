@@ -26,6 +26,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var hourlyAdapter: HourlyAdapter
 
     private lateinit var tvCity: TextView
     private lateinit var tvTemp: TextView
@@ -39,7 +40,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var hourRow1: LinearLayout
     private lateinit var hourRow2: LinearLayout
     private lateinit var hourlyCardContent: LinearLayout
-    private lateinit var weeklyCardContent: LinearLayout
+    private lateinit var weeklyContent: LinearLayout
+    private lateinit var weeklyCard: CardView
 
     private val apiKey = "d189a34eefc94e11b1b120814252006"
 
@@ -59,9 +61,12 @@ class MainActivity : AppCompatActivity() {
         hourRow1 = findViewById(R.id.hourRow1)
         hourRow2 = findViewById(R.id.hourRow2)
         hourlyCardContent = findViewById(R.id.hourlyCardContent)
-        weeklyCardContent = findViewById(R.id.weeklyContent)
+        weeklyContent = findViewById(R.id.weeklyContent)
+        weeklyCard = findViewById(R.id.weeklyCard)
 
+        hourlyAdapter = HourlyAdapter()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         requestLocationPermission()
     }
 
@@ -121,7 +126,6 @@ class MainActivity : AppCompatActivity() {
         tvExtras.text = "Feels like ${current.feelslike_c.toInt()}° | Sunset ${forecastDay?.astro?.sunset ?: "--:--"}"
 
         val condition = current.condition.text.lowercase()
-
         rootLayout.setBackgroundResource(BackgroundProvider.getBackground(condition))
         mainCard.setBackgroundResource(CardDrawableProvider.getCardDrawable(condition))
         hourlyCardContent.setBackgroundResource(HourlyBackgroundProvider.getHourlyCardBackground(condition))
@@ -134,6 +138,9 @@ class MainActivity : AppCompatActivity() {
                 else -> R.drawable.cloud
             }
         )
+
+        val forecastList = data.forecast.forecastday
+        renderWeeklyForecast(forecastList)
 
         val textColor = TextColorProvider.getTextColor(condition)
         listOf(tvCity, tvTemp, tvCondition, tvExtras, tvDate, tvDay).forEach {
@@ -149,12 +156,6 @@ class MainActivity : AppCompatActivity() {
         } ?: emptyList()
 
         renderHourlyForecast(hourlyList)
-
-        val dailyForecasts = data.forecast.forecastday.take(7).map {
-            Triple(it.date, it.day.avgtemp_c.toInt(), it.day.condition.text)
-        }
-
-        renderWeeklyForecast(dailyForecasts)
     }
 
     private fun renderHourlyForecast(hourlyList: List<HourlyWeather>) {
@@ -162,7 +163,7 @@ class MainActivity : AppCompatActivity() {
         hourRow2.removeAllViews()
 
         for ((index, hourData) in hourlyList.withIndex()) {
-            val item = createHourlyItem(this, hourData, index == 0)
+            val item = hourlyAdapter.createHourlyItem(this, hourData, isNow = index == 0)
             if (index < 5) {
                 hourRow1.addView(item)
             } else {
@@ -171,106 +172,58 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun createHourlyItem(context: android.content.Context, hourData: HourlyWeather, isNow: Boolean): LinearLayout {
-        val itemLayout = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
-            gravity = Gravity.CENTER
-        }
+    private fun renderWeeklyForecast(forecast: List<ForecastDay>) {
+        weeklyContent.removeAllViews()
 
-        val sdf = SimpleDateFormat("ha", Locale.getDefault())
-        val timeText = TextView(context).apply {
-            text = if (isNow) "Now" else sdf.format(Date(hourData.time * 1000))
-            setTextColor(Color.WHITE)
-            textSize = 12f
-            typeface = ResourcesCompat.getFont(context, R.font.poppins_regular)
-            gravity = Gravity.CENTER
-        }
-
-        val iconView = ImageView(context).apply {
-            layoutParams = ViewGroup.LayoutParams(48, 48)
-            setImageResource(
-                when {
-                    "rain" in hourData.condition.lowercase() -> R.drawable.rainy
-                    "cloud" in hourData.condition.lowercase() || "overcast" in hourData.condition.lowercase() -> R.drawable.cloud
-                    "snow" in hourData.condition.lowercase() -> R.drawable.cloud
-                    else -> R.drawable.sunny
-                }
-            )
-        }
-
-        val tempText = TextView(context).apply {
-            text = "${hourData.temperature}°"
-            setTextColor(Color.WHITE)
-            textSize = 12f
-            typeface = ResourcesCompat.getFont(context, R.font.poppins_regular)
-            gravity = Gravity.CENTER
-        }
-
-        itemLayout.addView(timeText)
-        itemLayout.addView(iconView)
-        itemLayout.addView(tempText)
-
-        return itemLayout
-    }
-
-    private fun renderWeeklyForecast(dailyList: List<Triple<String, Int, String>>) {
-        weeklyCardContent.removeAllViews()
-
-        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-
-        dailyList.forEachIndexed { index, (dateStr, temp, condition) ->
-            val row = LinearLayout(this).apply {
+        for ((index, day) in forecast.withIndex()) {
+            val dayLayout = LinearLayout(this).apply {
                 orientation = LinearLayout.HORIZONTAL
                 layoutParams = LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 ).apply {
-                    topMargin = if (index == 0) 0 else 12
+                    topMargin = if (index == 0) 0 else 16
                 }
                 gravity = Gravity.CENTER_VERTICAL
             }
 
-            val dayLabel = TextView(this).apply {
-                text = when (index) {
-                    0 -> "Today"
-                    1 -> "Tomorrow"
-                    else -> {
-                        val parsed = sdf.parse(dateStr)
-                        SimpleDateFormat("EEE", Locale.getDefault()).format(parsed ?: Date())
-                    }
-                }
+            val dayName = TextView(this).apply {
+                text = if (index == 0) "Today" else if (index == 1) "Tomorrow" else getDayName(day.date)
                 setTextColor(Color.WHITE)
                 textSize = 14f
-                typeface = ResourcesCompat.getFont(this@MainActivity, R.font.poppins_medium)
+                typeface = ResourcesCompat.getFont(context, R.font.poppins_medium)
                 layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
             }
 
-            val iconView = ImageView(this).apply {
-                layoutParams = LinearLayout.LayoutParams(40, 40)
+            val icon = ImageView(this).apply {
+                layoutParams = ViewGroup.LayoutParams(48, 48)
                 setImageResource(
                     when {
-                        "rain" in condition.lowercase() -> R.drawable.rainy
-                        "cloud" in condition.lowercase() || "overcast" in condition.lowercase() -> R.drawable.cloud
-                        "snow" in condition.lowercase() -> R.drawable.cloud
-                        else -> R.drawable.sunny
+                        "rain" in day.day.condition.text.lowercase() -> R.drawable.rainy
+                        "cloud" in day.day.condition.text.lowercase() -> R.drawable.cloud
+                        "sun" in day.day.condition.text.lowercase() || "clear" in day.day.condition.text.lowercase() -> R.drawable.sunny
+                        else -> R.drawable.cloud
                     }
                 )
             }
 
-            val tempView = TextView(this).apply {
-                text = "$temp°"
+            val temp = TextView(this).apply {
+                text = "${day.day.maxtemp_c.toInt()}° / ${day.day.mintemp_c.toInt()}°"
                 setTextColor(Color.WHITE)
                 textSize = 14f
-                typeface = ResourcesCompat.getFont(this@MainActivity, R.font.poppins_regular)
-                setPadding(12, 0, 0, 0)
+                typeface = ResourcesCompat.getFont(context, R.font.poppins_medium)
+                gravity = Gravity.END
+                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
             }
 
-            row.addView(dayLabel)
-            row.addView(iconView)
-            row.addView(tempView)
-            weeklyCardContent.addView(row)
+            dayLayout.addView(dayName)
+            dayLayout.addView(icon)
+            dayLayout.addView(temp)
+            weeklyContent.addView(dayLayout)
         }
+
+        val condition = forecast.firstOrNull()?.day?.condition?.text ?: ""
+        weeklyCard.setBackgroundResource(HourlyBackgroundProvider.getHourlyCardBackground(condition))
     }
 
     private fun parseHour(timestamp: String): Long {

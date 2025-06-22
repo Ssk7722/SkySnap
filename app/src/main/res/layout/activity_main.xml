@@ -1,154 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_sunny">
+    android:background="@drawable/bg_sunny"
+    android:fillViewport="true">
 
-    <!-- Weather Card -->
     <LinearLayout
-        android:id="@+id/mainCard"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="16dp"
-        android:padding="20dp"
-        android:background="@drawable/card_default"
-        android:elevation="6dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/tvDay"
-            android:layout_width="wrap_content"
+        <!-- Main Weather Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mainCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/today"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="18sp" />
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/card_sunny"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp">
 
-        <ImageView
-            android:id="@+id/ivIcon"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="12dp"
-            android:contentDescription="@string/weather_icon"
-            android:src="@drawable/cloud" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/tvTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/default_temp"
-            android:textColor="@android:color/white"
-            android:textSize="48sp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_medium" />
+                <TextView android:id="@+id/tvCity"
+                    android:text="City"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/tvCondition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/default_condition"
-            android:fontFamily="@font/poppins_semibold"
+                <ImageView android:id="@+id/ivIcon"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/sunny" />
+
+                <TextView android:id="@+id/tvTemp"
+                    android:text="25°"
+                    android:textColor="@android:color/white"
+                    android:textSize="64sp"
+                    android:textStyle="bold" />
+
+                <TextView android:id="@+id/tvCondition"
+                    android:text="Clear"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+                <TextView android:id="@+id/tvExtras"
+                    android:text="Feels like 27° | Sunset 6:40 PM"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Date and Day -->
+        <TextView android:id="@+id/tvDay"
+            android:text="Today"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            android:layout_marginTop="4dp" />
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvCity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/default_city"
+        <TextView android:id="@+id/tvDate"
+            android:text="22 June 2025"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/poppins_medium" />
-
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/default_date"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/poppins_medium"
             android:textSize="14sp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:id="@+id/tvExtras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/default_extras"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <!-- Hourly Forecast Container Card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/hourlyCardContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="12dp"
-        android:elevation="6dp"
-        android:background="@android:color/transparent"
-        app:cardCornerRadius="24dp"
-        app:layout_constraintTop_toBottomOf="@id/mainCard"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
+        <!-- Hourly Forecast -->
+        <androidx.cardview.widget.CardView
             android:id="@+id/hourlyCardContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp"
-            android:background="@drawable/bg_hourly_cloudy">
+            app:cardCornerRadius="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_hourly_sunny"
+            app:cardElevation="0dp">
 
-            <!-- First Row -->
             <LinearLayout
-                android:id="@+id/hourRow1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="5"
-                android:orientation="horizontal"
-                android:gravity="center" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <!-- Separator Line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="8dp"
-                android:background="#80FFFFFF" />
+                <LinearLayout
+                    android:id="@+id/hourRow1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp" />
 
-            <!-- Second Row -->
+                <LinearLayout
+                    android:id="@+id/hourRow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Weekly Forecast -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/weeklyCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_hourly_sunny"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            android:layout_marginBottom="24dp">
+
             <LinearLayout
-                android:id="@+id/hourRow2"
+                android:id="@+id/weeklyContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="5"
-                android:orientation="horizontal"
-                android:gravity="center" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="vertical"
+                android:padding="16dp" />
+        </androidx.cardview.widget.CardView>
 
-    <!-- Hourly Forecast RecyclerView (optional or future use) -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerHourly"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="24dp"
-        android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/hourlyCardContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
