@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/hourlyCard"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    card_view:cardCornerRadius="16dp"
+    card_view:cardElevation="4dp"
+    android:backgroundTint="@color/card_cloudy">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <!-- Time -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_time"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center" />
+
+        <!-- Weather Icon -->
+        <ImageView
+            android:id="@+id/ivCondition"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/weather_icon"
+            android:src="@drawable/cloud" />
+
+        <!-- Temperature -->
+        <TextView
+            android:id="@+id/tvTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_temp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginTop="4dp"
+            android:gravity="center" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

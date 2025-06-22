@@ -1,0 +1,13 @@
+<resources>
+    <string name="today">Today</string>
+    <string name="weather_icon">Weather icon</string>
+    <string name="default_temp">--°</string>
+    <string name="default_condition">--</string>
+    <string name="default_city">--</string>
+    <string name="default_date">--</string>
+    <string name="default_extras">Feels like -- | Sunset --:--</string>
+    <string name="default_time">--</string>
+    <string name="app_name">SkySnap</string>
+
+
+</resources>

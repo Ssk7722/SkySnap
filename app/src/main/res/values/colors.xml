@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="card_sunny">#FFD54F</color>
+    <color name="bg_gradient_start_sunny">#FFF176</color>
+    <color name="bg_gradient_end_sunny">#FBC02D</color>
+
+    <color name="card_cloudy">#90A4AE</color>
+    <color name="bg_gradient_start_cloudy">#B0BEC5</color>
+    <color name="bg_gradient_end_cloudy">#78909C</color>
+
+    <color name="card_rainy">#4FC3F7</color>
+    <color name="bg_gradient_start_rainy">#29B6F6</color>
+    <color name="bg_gradient_end_rainy">#0288D1</color>
+
+    <color name="card_snowy">#E0F7FA</color>
+    <color name="bg_gradient_start_snowy">#B2EBF2</color>
+    <color name="bg_gradient_end_snowy">#80DEEA</color>
+    <color name="text_light">#FFFFFF</color> <!-- for rainy/night -->
+    <color name="text_dark">#1A1A1A</color>  <!-- for sunny/cloudy -->
+    <color name="text_rainy">#FFFFFFFF</color>
+    <color name="text_sunny">#FF000000</color>
+
+</resources>
