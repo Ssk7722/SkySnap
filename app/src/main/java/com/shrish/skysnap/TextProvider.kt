@@ -1,6 +1,6 @@
 package com.shrish.skysnap
 
-object BackgroundProvider {
+object TextBackgroundProvider {
 
     fun getBackground(conditionText: String): Int {
         val condition = conditionText.lowercase()

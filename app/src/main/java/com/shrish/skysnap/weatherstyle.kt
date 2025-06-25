@@ -3,13 +3,14 @@ package com.shrish.skysnap
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 
-object WeatherStyleProvider {
+data class WeatherStyle(
+    @DrawableRes val backgroundDrawable: Int,
+    @DrawableRes val cardDrawable: Int,
+    @ColorRes val textColor: Int,
+    @DrawableRes val iconDrawable: Int
+)
 
-    data class WeatherStyle(
-        @DrawableRes val backgroundDrawable: Int,
-        @ColorRes val cardColor: Int,
-        @ColorRes val textColor: Int
-    )
+object WeatherStyleHelper {
 
     fun getStyle(condition: String): WeatherStyle {
         val lower = condition.lowercase()
@@ -17,32 +18,37 @@ object WeatherStyleProvider {
         return when {
             containsAny(lower, listOf("rain", "shower", "drizzle", "thunderstorm", "storm")) -> WeatherStyle(
                 backgroundDrawable = R.drawable.bg_rainy,
-                cardColor = R.color.card_rainy,
-                textColor = R.color.text_light
+                cardDrawable = R.drawable.card_rainy,
+                textColor = R.color.rainy_text,
+                iconDrawable = R.drawable.rainy
             )
 
             containsAny(lower, listOf("cloud", "overcast", "mist", "fog", "haze")) -> WeatherStyle(
                 backgroundDrawable = R.drawable.bg_cloudy,
-                cardColor = R.color.card_cloudy,
-                textColor = R.color.text_dark
+                cardDrawable = R.drawable.card_cloudy,
+                textColor = R.color.cloudy_text,
+                iconDrawable = R.drawable.cloud
             )
 
             containsAny(lower, listOf("sun", "clear", "bright")) -> WeatherStyle(
                 backgroundDrawable = R.drawable.bg_sunny,
-                cardColor = R.color.card_sunny,
-                textColor = R.color.text_dark
+                cardDrawable = R.drawable.card_sunny,
+                textColor = R.color.sunny_text,
+                iconDrawable = R.drawable.sunny
             )
 
             containsAny(lower, listOf("snow", "blizzard", "sleet", "ice", "flurry")) -> WeatherStyle(
                 backgroundDrawable = R.drawable.bg_snowy,
-                cardColor = R.color.card_snowy,
-                textColor = R.color.text_dark
+                cardDrawable = R.drawable.card_snowy,
+                textColor = R.color.snowy_text,
+                iconDrawable = R.drawable.cloud
             )
 
             else -> WeatherStyle(
                 backgroundDrawable = R.drawable.bg_cloudy,
-                cardColor = R.color.card_cloudy,
-                textColor = R.color.text_dark
+                cardDrawable = R.drawable.card_cloudy,
+                textColor = R.color.cloudy_text,
+                iconDrawable = R.drawable.cloud
             )
         }
     }

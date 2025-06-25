@@ -2,13 +2,11 @@ package com.shrish.skysnap
 
 object CardDrawableProvider {
     fun getCardDrawable(condition: String): Int {
-        val lc = condition.lowercase()
-
+        val lower = condition.lowercase()
         return when {
-            "rain" in lc -> R.drawable.card_rainy
-            "cloud" in lc || "overcast" in lc || "partly" in lc -> R.drawable.card_cloudy
-            "snow" in lc -> R.drawable.card_snowy
-            "sun" in lc || "clear" in lc -> R.drawable.card_sunny
+            "rain" in lower -> R.drawable.card_rainy
+            "cloud" in lower || "overcast" in lower -> R.drawable.card_cloudy
+            "sun" in lower || "clear" in lower -> R.drawable.card_sunny
             else -> R.drawable.card_default
         }
     }

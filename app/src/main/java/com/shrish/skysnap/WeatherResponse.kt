@@ -32,12 +32,7 @@ data class Forecast(
     val forecastday: List<ForecastDay>
 )
 
-data class ForecastDay(
-    val date: String,
-    val day: Day,
-    val astro: Astro,
-    val hour: List<Hour>
-)
+
 
 data class Day(
     val maxtemp_c: Double,

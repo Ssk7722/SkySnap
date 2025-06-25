@@ -1,130 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_sunny"
+    android:background="#F0F4F8"
     android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal">
+        android:padding="16dp">
 
-        <!-- Main Weather Card -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/mainCard"
+        <!-- MAIN WEATHER CARD -->
+        <include layout="@layout/card_main_weather" />
+
+        <!-- WEEKLY SCROLL -->
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/card_sunny"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0dp">
+            android:layout_marginTop="16dp"
+            android:scrollbars="none">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/layoutWeeklyContainer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="24dp"
-                android:gravity="center_horizontal">
-
-                <TextView android:id="@+id/tvCity"
-                    android:text="City"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-
-                <ImageView android:id="@+id/ivIcon"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/sunny" />
-
-                <TextView android:id="@+id/tvTemp"
-                    android:text="25°"
-                    android:textColor="@android:color/white"
-                    android:textSize="64sp"
-                    android:textStyle="bold" />
-
-                <TextView android:id="@+id/tvCondition"
-                    android:text="Clear"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-
-                <TextView android:id="@+id/tvExtras"
-                    android:text="Feels like 27° | Sunset 6:40 PM"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp"/>
+                android:orientation="horizontal">
+                <!-- cards will be added programmatically -->
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </HorizontalScrollView>
 
-        <!-- Date and Day -->
-        <TextView android:id="@+id/tvDay"
-            android:text="Today"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView android:id="@+id/tvDate"
-            android:text="22 June 2025"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Hourly Forecast -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/hourlyCardContent"
+        <!-- HOURLY SCROLL -->
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="24dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/bg_hourly_sunny"
-            app:cardElevation="0dp">
+            android:layout_marginTop="16dp"
+            android:scrollbars="none">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/layoutHourlyContainer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <LinearLayout
-                    android:id="@+id/hourRow1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginBottom="8dp" />
-
-                <LinearLayout
-                    android:id="@+id/hourRow2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center" />
+                android:orientation="horizontal">
+                <!-- cards will be added programmatically -->
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Weekly Forecast -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/weeklyCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_hourly_sunny"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0dp"
-            android:layout_marginBottom="24dp">
-
-            <LinearLayout
-                android:id="@+id/weeklyContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp" />
-        </androidx.cardview.widget.CardView>
+        </HorizontalScrollView>
 
     </LinearLayout>
 </ScrollView>

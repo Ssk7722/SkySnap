@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rainyLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_rainy"
+    tools:context=".MainActivity">
+
+    <!-- Main Card -->
+    <LinearLayout
+        android:id="@+id/mainWeatherCard"
+        android:layout_width="279dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="42dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:backgroundTint="#40666A"
+        android:background="#40666A"
+        android:elevation="4dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <TextView
+            android:id="@+id/todayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            android:textColor="#C9E8E0"
+            android:textSize="19.38sp"
+            android:fontFamily="@font/poppins_medium" />
+
+        <ImageView
+            android:id="@+id/weatherIcon"
+            android:layout_width="58dp"
+            android:layout_height="40dp"
+            android:src="@drawable/rainy"
+            android:layout_marginTop="10dp" />
+
+        <!-- Decorative drops -->
+        <View
+            android:layout_width="8dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="6dp"
+            android:background="#C9E8E0" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:background="#C9E8E0" />
+
+        <!-- Big Temperature -->
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="13"
+            android:textColor="#C9E8E0"
+            android:textSize="77.54sp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginTop="8dp" />
+
+        <!-- City and Weather -->
+        <TextView
+            android:id="@+id/weatherText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rainy"
+            android:textColor="#C9E8E0"
+            android:textSize="15.51sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="California, Los Angeles"
+            android:textColor="#C9E8E0"
+            android:textSize="11.63sp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginTop="4dp" />
+
+        <!-- Date and Sunset -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:text="21 Oct 2019"
+                android:textColor="#C9E8E0"
+                android:textSize="11.63sp"
+                android:fontFamily="@font/poppins_medium" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="#C9E8E0" />
+
+            <TextView
+                android:text="Feels like 8"
+                android:textColor="#C9E8E0"
+                android:textSize="11.63sp"
+                android:fontFamily="@font/poppins_medium" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="#C9E8E0" />
+
+            <TextView
+                android:text="Sunset 18:20"
+                android:textColor="#C9E8E0"
+                android:textSize="11.63sp"
+                android:fontFamily="@font/poppins_medium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Hourly Forecast Card -->
+    <LinearLayout
+        android:id="@+id/hourlyCard"
+        android:layout_width="279dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/mainWeatherCard"
+        android:layout_marginTop="28dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rainy_radial"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:clipToOutline="true" />
+
+    <!-- Weekly Forecast Card -->
+    <LinearLayout
+        android:id="@+id/weeklyCard"
+        android:layout_width="279dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/hourlyCard"
+        android:layout_marginTop="28dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rainy_radial"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:clipToOutline="true" />
+
+</RelativeLayout>

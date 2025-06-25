@@ -1,62 +1,46 @@
 package com.shrish.skysnap
 
 import android.content.Context
-import android.graphics.Color
 import android.view.Gravity
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
-import java.text.SimpleDateFormat
-import java.util.*
 
-class HourlyAdapter {
+class HourlyAdapter(private val context: Context, private val hourlyList: List<HourlyWeather>) : BaseAdapter() {
 
-    fun createHourlyItem(
-        context: Context,
-        hourData: HourlyWeather,
-        isNow: Boolean = false
-    ): LinearLayout {
-        val itemLayout = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
-            gravity = Gravity.CENTER
-        }
+    override fun getCount(): Int = hourlyList.size
+    override fun getItem(position: Int): Any = hourlyList[position]
+    override fun getItemId(position: Int): Long = position.toLong()
 
-        val timeText = TextView(context).apply {
-            text = if (isNow) "Now" else SimpleDateFormat("ha", Locale.getDefault()).format(Date(hourData.time * 1000))
-            setTextColor(Color.WHITE)
-            textSize = 12f
-            typeface = ResourcesCompat.getFont(context, R.font.poppins_regular)
-            gravity = Gravity.CENTER
-        }
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_hourly, parent, false)
 
-        val iconView = ImageView(context).apply {
-            layoutParams = ViewGroup.LayoutParams(48, 48)
-            setImageResource(
-                when {
-                    "rain" in hourData.condition.lowercase() -> R.drawable.rainy
-                    "cloud" in hourData.condition.lowercase() || "overcast" in hourData.condition.lowercase() -> R.drawable.cloud
-                    "snow" in hourData.condition.lowercase() -> R.drawable.cloud
-                    else -> R.drawable.sunny
-                }
-            )
-        }
+        val time = view.findViewById<TextView>(R.id.tvTime)
+        val temp = view.findViewById<TextView>(R.id.tvTemp)
+        val icon = view.findViewById<ImageView>(R.id.ivCondition)
+        val container = view.findViewById<LinearLayout>(R.id.hourlyContainer)
 
-        val tempText = TextView(context).apply {
-            text = "${hourData.temperature}°"
-            setTextColor(Color.WHITE)
-            textSize = 12f
-            typeface = ResourcesCompat.getFont(context, R.font.poppins_regular)
-            gravity = Gravity.CENTER
-        }
+        val weather = hourlyList[position]
 
-        itemLayout.addView(timeText)
-        itemLayout.addView(iconView)
-        itemLayout.addView(tempText)
+        time.text = if (position == 0) "Now" else formatHour(weather.time)
+        temp.text = "${weather.temperature}°"
+        icon.setImageResource(WeatherStyleProvider.getIcon(weather.condition))
 
-        return itemLayout
+        // Set background and text color dynamically
+        container.background = context.getDrawable(WeatherStyleProvider.getHourlyCardDrawable(weather.condition))
+        val textColor = ContextCompat.getColor(context, TextColorProvider.getTextColor(weather.condition))
+        time.setTextColor(textColor)
+        temp.setTextColor(textColor)
+
+        return view
+    }
+
+    private fun formatHour(timestamp: Long): String {
+        val calendar = java.util.Calendar.getInstance()
+        calendar.timeInMillis = timestamp * 1000
+        val hour = calendar.get(Calendar.HOUR)
+        val amPm = if (calendar.get(Calendar.AM_PM) == Calendar.AM) "AM" else "PM"
+        return if (hour == 0) "12 $amPm" else "$hour $amPm"
     }
 }

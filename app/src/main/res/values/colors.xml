@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="card_sunny">#FFD54F</color>
-    <color name="bg_gradient_start_sunny">#FFF176</color>
-    <color name="bg_gradient_end_sunny">#FBC02D</color>
 
-    <color name="card_cloudy">#90A4AE</color>
-    <color name="bg_gradient_start_cloudy">#B0BEC5</color>
-    <color name="bg_gradient_end_cloudy">#78909C</color>
+    <!-- TEXT COLORS -->
+    <color name="rainy_text">#102A43</color>
+    <color name="sunny_text">#5B3E1D</color>
+    <color name="snowy_text">#4B5E6D</color>
+    <color name="cloudy_text">#445566</color>
 
-    <color name="card_rainy">#4FC3F7</color>
-    <color name="bg_gradient_start_rainy">#29B6F6</color>
-    <color name="bg_gradient_end_rainy">#0288D1</color>
+    <!-- RAINY CARD GRADIENT -->
+    <color name="rainy_card_center">#E0F7FA</color>
+    <color name="rainy_card_edge">#F5FEFF</color>
 
-    <color name="card_snowy">#E0F7FA</color>
-    <color name="bg_gradient_start_snowy">#B2EBF2</color>
-    <color name="bg_gradient_end_snowy">#80DEEA</color>
-    <color name="text_light">#FFFFFF</color> <!-- for rainy/night -->
-    <color name="text_dark">#1A1A1A</color>  <!-- for sunny/cloudy -->
-    <color name="text_rainy">#FFFFFFFF</color>
-    <color name="text_sunny">#FF000000</color>
+    <!-- SUNNY CARD GRADIENT -->
+    <color name="sunny_card_center">#FAE2BD</color>
+    <color name="sunny_card_edge">#FAE2BD</color>
 
+    <!-- SNOWY CARD GRADIENT -->
+    <color name="snowy_card_center">#EAF6FF</color>
+    <color name="snowy_card_edge">#D3E9F4</color>
+
+    <!-- CLOUDY CARD GRADIENT -->
+    <color name="cloudy_card_center">#E8EBF0</color>
+    <color name="cloudy_card_edge">#DCE1E6</color>
+
+
+    <!-- LEGACY DEFAULT COLORS (Required to fix merge errors) -->
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="white">#FFFFFF</color>
 </resources>
