@@ -1,5 +1,4 @@
 package com.shrish.skysnap
-import com.shrish.skysnap.WeatherStyleProvider
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
