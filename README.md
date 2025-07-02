@@ -64,6 +64,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 This project is licensed under the MIT License.
 
 ---
+> 📦 **SkySnap v1.0.0**  
+> [⬇️ Download Now](https://github.com/Ssk7722/SkySnap/releases/latest)
+
 
 > Designed & developed with care to bring weather to your fingertips.
 
