@@ -19,7 +19,12 @@ data class Location(
 data class Current(
     val temp_c: Double,
     val condition: Condition,
-    val feelslike_c: Double
+    val feelslike_c: Double,
+    val precip_mm: Double,
+    val humidity: Int,
+    val uv: Double,
+    val wind_kph: Double,
+    val is_day: Int
 )
 
 data class Condition(
@@ -32,7 +37,12 @@ data class Forecast(
     val forecastday: List<ForecastDay>
 )
 
-
+data class ForecastDay(
+    val date: String,
+    val day: Day,
+    val astro: Astro,
+    val hour: List<Hour>
+)
 
 data class Day(
     val maxtemp_c: Double,
@@ -49,5 +59,10 @@ data class Astro(
 data class Hour(
     val time: String,
     val temp_c: Double,
-    val condition: Condition
+    val condition: Condition,
+    val is_day: Int,
+    val precip_mm: Double,
+    val humidity: Int,
+    val uv: Double,
+    val wind_kph: Double
 )

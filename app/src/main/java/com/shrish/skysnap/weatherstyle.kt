@@ -1,59 +1,59 @@
 package com.shrish.skysnap
 
-import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 
 data class WeatherStyle(
     @DrawableRes val backgroundDrawable: Int,
-    @DrawableRes val cardDrawable: Int,
-    @ColorRes val textColor: Int,
+    val cardColorHex: String,
+    val textColorHex: String,
     @DrawableRes val iconDrawable: Int
 )
 
 object WeatherStyleHelper {
 
-    fun getStyle(condition: String): WeatherStyle {
-        val lower = condition.lowercase()
-
+    fun getStyle(weatherType: WeatherConditionParser.WeatherType, isNight: Boolean): WeatherStyle {
         return when {
-            containsAny(lower, listOf("rain", "shower", "drizzle", "thunderstorm", "storm")) -> WeatherStyle(
+            isNight -> WeatherStyle(
+                backgroundDrawable = R.drawable.bg_night,
+                cardColorHex = "#9090AC",
+                textColorHex = "#484A82",
+                iconDrawable = R.drawable.night
+            )
+
+            weatherType == WeatherConditionParser.WeatherType.RAIN -> WeatherStyle(
                 backgroundDrawable = R.drawable.bg_rainy,
-                cardDrawable = R.drawable.card_rainy,
-                textColor = R.color.rainy_text,
+                cardColorHex = "#40666A",
+                textColorHex = "#C9E8E0",
                 iconDrawable = R.drawable.rainy
             )
 
-            containsAny(lower, listOf("cloud", "overcast", "mist", "fog", "haze")) -> WeatherStyle(
-                backgroundDrawable = R.drawable.bg_cloudy,
-                cardDrawable = R.drawable.card_cloudy,
-                textColor = R.color.cloudy_text,
-                iconDrawable = R.drawable.cloud
-            )
-
-            containsAny(lower, listOf("sun", "clear", "bright")) -> WeatherStyle(
-                backgroundDrawable = R.drawable.bg_sunny,
-                cardDrawable = R.drawable.card_sunny,
-                textColor = R.color.sunny_text,
-                iconDrawable = R.drawable.sunny
-            )
-
-            containsAny(lower, listOf("snow", "blizzard", "sleet", "ice", "flurry")) -> WeatherStyle(
+            weatherType == WeatherConditionParser.WeatherType.SNOW -> WeatherStyle(
                 backgroundDrawable = R.drawable.bg_snowy,
-                cardDrawable = R.drawable.card_snowy,
-                textColor = R.color.snowy_text,
+                cardColorHex = "#99B8CC",
+                textColorHex = "#E4F1F9",
                 iconDrawable = R.drawable.cloud
+            )
+
+            weatherType == WeatherConditionParser.WeatherType.CLOUD -> WeatherStyle(
+                backgroundDrawable = R.drawable.bg_cloudy,
+                cardColorHex = "#637178",
+                textColorHex = "#AED5E4",
+                iconDrawable = R.drawable.cloud
+            )
+
+            weatherType == WeatherConditionParser.WeatherType.SUNNY -> WeatherStyle(
+                backgroundDrawable = R.drawable.bg_sunny,
+                cardColorHex = "#EDC368",
+                textColorHex = "#F6C8A4",
+                iconDrawable = R.drawable.sunny
             )
 
             else -> WeatherStyle(
                 backgroundDrawable = R.drawable.bg_cloudy,
-                cardDrawable = R.drawable.card_cloudy,
-                textColor = R.color.cloudy_text,
+                cardColorHex = "#637178",
+                textColorHex = "#AED5E4",
                 iconDrawable = R.drawable.cloud
             )
         }
-    }
-
-    private fun containsAny(text: String, keywords: List<String>): Boolean {
-        return keywords.any { it in text }
     }
 }

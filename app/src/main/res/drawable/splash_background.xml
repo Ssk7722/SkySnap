@@ -2,7 +2,8 @@
     <item android:drawable="@color/white" />
     <item>
         <bitmap
-            android:gravity="center"
-            android:src="@drawable/loading" />
+            android:gravity="fill"
+            android:src="@drawable/loading"
+            android:tileMode="disabled" />
     </item>
 </layer-list>

@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- PNG Background as an ImageView -->
+    <!-- Background image -->
     <ImageView
         android:id="@+id/bgImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bg_rainy"
+        android:src="@drawable/bg_sunny"
         android:scaleType="centerCrop" />
 
-    <!-- Foreground content -->
+    <!-- Foreground UI -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false">
 
-        <!-- Top Weather Card -->
+        <!-- Weather Card -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardWeather"
             android:layout_width="346.54dp"
@@ -29,7 +29,7 @@
             android:layout_centerHorizontal="true"
             app:cardCornerRadius="27.14dp"
             app:cardElevation="0dp"
-            android:backgroundTint="#40666A">
+            android:backgroundTint="#AC736A">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                     android:layout_marginTop="24.25dp"
                     android:layout_centerHorizontal="true"
                     android:text="Today"
-                    android:textColor="#C9E8E0"
+                    android:textColor="#F6C8A4"
                     android:textSize="14sp"
                     android:fontFamily="@font/poppins_medium" />
 
@@ -52,8 +52,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="72.69dp"
                     android:layout_marginStart="167.27dp"
-                    android:text="13°"
-                    android:textColor="#C9E8E0"
+                    android:text="32°"
+                    android:textColor="#F6C8A4"
                     android:textSize="77.54sp"
                     android:fontFamily="@font/poppins_medium" />
 
@@ -63,8 +63,11 @@
                     android:layout_height="71.14dp"
                     android:layout_marginTop="91.69dp"
                     android:layout_marginStart="60.27dp"
-                    android:src="@drawable/rainy"
-                    android:contentDescription="Weather Icon" />
+                    android:src="@drawable/sunny"
+                    android:contentDescription="Weather Icon"
+                    app:tint="#F6C8A4"/>
+
+
 
                 <TextView
                     android:id="@+id/tvCondition"
@@ -72,8 +75,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="213.69dp"
                     android:layout_centerHorizontal="true"
-                    android:text="Rainy"
-                    android:textColor="#C9E8E0"
+                    android:text="Sunny"
+                    android:textColor="#F6C8A4"
                     android:textSize="15.51sp"
                     android:fontFamily="@font/poppins_semibold" />
 
@@ -84,7 +87,7 @@
                     android:layout_marginTop="255.69dp"
                     android:layout_centerHorizontal="true"
                     android:text="California, Los Angeles"
-                    android:textColor="#C9E8E0"
+                    android:textColor="#F6C8A4"
                     android:textSize="11.63sp"
                     android:fontFamily="@font/poppins_medium" />
 
@@ -95,7 +98,7 @@
                     android:layout_marginTop="289.69dp"
                     android:layout_centerHorizontal="true"
                     android:text="21 Oct 2019"
-                    android:textColor="#C9E8E0"
+                    android:textColor="#F6C8A4"
                     android:textSize="11.63sp"
                     android:fontFamily="@font/poppins_medium" />
 
@@ -113,8 +116,8 @@
                         android:id="@+id/tvExtras"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Feels like 8°"
-                        android:textColor="#C9E8E0"
+                        android:text="Feels like 30°"
+                        android:textColor="#F6C8A4"
                         android:textSize="11.63sp"
                         android:fontFamily="@font/poppins_medium" />
 
@@ -124,13 +127,13 @@
                         android:layout_height="14dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:background="#C9E8E0"
+                        android:textColor="#F6C8A4"
                         android:visibility="gone" />
                 </LinearLayout>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Hourly Forecast Container -->
+        <!-- Hourly Forecast -->
         <FrameLayout
             android:id="@+id/hourlyBlurContainer"
             android:layout_width="346.54dp"
@@ -175,7 +178,7 @@
             </LinearLayout>
         </FrameLayout>
 
-        <!-- Weekly Forecast Container -->
+        <!-- Weekly Forecast -->
         <FrameLayout
             android:id="@+id/weeklyBlurContainer"
             android:layout_width="346.54dp"

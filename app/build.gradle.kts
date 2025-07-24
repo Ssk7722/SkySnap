@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.shrish.skysnap"
-        minSdk = 24
+        minSdk = 31
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -47,6 +47,11 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.play.services.location)
     implementation(libs.androidx.cardview)
+    implementation(libs.blurview)
+
+
+
+
 
     implementation("io.coil-kt:coil:2.4.0")
 

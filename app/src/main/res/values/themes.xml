@@ -12,9 +12,9 @@
 
     <!-- Splash Screen Theme -->
     <style name="Theme.SkySnap.Splash" parent="Theme.SkySnap">
-        <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
 </resources>

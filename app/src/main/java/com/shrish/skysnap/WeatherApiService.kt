@@ -9,7 +9,7 @@ interface WeatherApiService {
     fun getWeatherData(
         @Query("key") apiKey: String,
         @Query("q") location: String,
-        @Query("days") days: Int = 1,
+        @Query("days") days: Int =8,
         @Query("aqi") aqi: String = "no",
         @Query("alerts") alerts: String = "no"
     ): Call<WeatherResponse>
